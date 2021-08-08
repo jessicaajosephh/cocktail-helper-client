@@ -25,6 +25,30 @@ function submitCocktail(e){
     renderCocktail(cocktailNameInput.value, imageInput.value, instructionsInput.value)
 }
 
+function renderCocktail(name, image, instructions){
+    const cocktailList = document.getElementById("cocktail-list")
+
+    const cocktailMarkup =`
+        <h3 id="cocktail-name">${name}</h3><br>
+        <img src=${image} id="cocktail-image" width="250" height="250"><br>
+
+        <label type="text">Instructions:</label>
+        <p id="instructions">${instructions}</p><br>
+    `
+    const ingredientForm = document.createElement('form')
+    ingredientForm.innerHTML += `<input type="text" id="ingredient-input" placeholder="Ingredient">
+    <input type="submit" value="Add">`
+
+    ingredientForm.addEventListener("submit", (e) => renderIngredient(e))
+
+    const ingredientDiv = document.getElementById("ingredient-list")
+    const ingredientList = document.createElement("ul")
+
+    cocktailList.innerHTML += cocktailMarkup 
+    cocktailList.append(ingredientForm, ingredientList)
+    cocktailForm.requestFullscreen()
+}
+
 function fetchCocktails(){
     fetch(cocktailsURL)
     .then(resp => resp.json())
