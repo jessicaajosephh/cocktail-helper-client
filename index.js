@@ -5,6 +5,8 @@ const imageInput = document.getElementById("input-image-url")
 const cocktailNameInput = document.getElementById("input-cocktail-name")
 const instructionsInput = document.getElementById("input-instructions")
 
+cocktailForm.addEventListener("submit", (e) => {submitCocktail(e)})
+
 function fetchCocktails(){
     fetch(cocktailsURL)
     .then(resp => resp.json())
