@@ -37,9 +37,11 @@ function fetchCocktails(){
 )}
 
 function renderCocktail(cocktailObj){
-
+        console.log(cocktailObj.id)
         const cocktailList = document.getElementById("cocktail-list")
-        cocktailList.dataset.id = cocktailObj.id
+        const cocktailLi = document.createElement('li')
+        cocktailLi.dataset.id = cocktailObj.id
+        cocktailList.appendChild(cocktailLi)
         const h3 = document.createElement('h3')
         h3.innerText = cocktailObj.attributes.name
         const img = document.createElement('img')
@@ -65,7 +67,7 @@ function renderCocktail(cocktailObj){
 
     })
 
-    cocktailList.append( h3, img, ingredientList, ingredientForm, p, deleteBtn)
+    cocktailLi.append( h3, img, ingredientList, ingredientForm, p, deleteBtn)
     cocktailForm.reset()
 
  }
