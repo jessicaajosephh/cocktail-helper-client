@@ -9,45 +9,50 @@ cocktailForm.addEventListener("submit", (e) => {submitCocktail(e)})
 
 function submitCocktail(e){
     e.preventDefault()
-    fetch(cocktailsURL, {
+   fetch(cocktailsURL, {
         method: "POST",
         headers: {
-            "Content-Type": "applications/json",
+            "Content-Type": "application/json",
             "Accept": "application/json",
         },
         body: JSON.stringify({
-            image: imageInput.value 
-            name: cocktailNameInput.value 
-            instructions: instructionsInput.value 
+           image: imageInput.value,
+           name: cocktailNameInput.value,
+           instructions: instructionsInput.value
+
         })
     })
 
-    renderCocktail(cocktailNameInput.value, imageInput.value, instructionsInput.value)
+     renderCocktail(cocktailNameInput.value,imageInput.value, instructionsInput.value)
 }
 
 function renderCocktail(name, image, instructions){
     const cocktailList = document.getElementById("cocktail-list")
 
     const cocktailMarkup =`
-        <h3 id="cocktail-name">${name}</h3><br>
-        <img src=${image} id="cocktail-image" width="250" height="250"><br>
+    
+            <h3 id="cocktail-name">${name}</h3><br>
+            <img src=${image} id="cocktail-image" width="250" height="250"><br>
+        
+            <label type="text">Instructions:</label>
+            <p id="instructions">${instructions}</p><br>
+        `
 
-        <label type="text">Instructions:</label>
-        <p id="instructions">${instructions}</p><br>
-    `
     const ingredientForm = document.createElement('form')
-    ingredientForm.innerHTML += `<input type="text" id="ingredient-input" placeholder="Ingredient">
+    ingredientForm.innerHTML += `<input type="text" id="ingredient-input" placeholder ="Ingredient">
     <input type="submit" value="Add">`
 
-    ingredientForm.addEventListener("submit", (e) => renderIngredient(e))
+
+     ingredientForm.addEventListener("submit", (e) => renderIngredient(e))
 
     const ingredientDiv = document.getElementById("ingredient-list")
     const ingredientList = document.createElement("ul")
 
-    cocktailList.innerHTML += cocktailMarkup 
-    cocktailList.append(ingredientForm, ingredientList)
-    cocktailForm.requestFullscreen()
-}
+    cocktailList.innerHTML += cocktailMarkup
+    cocktailList.append( ingredientForm, ingredientList)
+    cocktailForm.reset()
+
+ }
 
 function renderIngredient(e){
 
