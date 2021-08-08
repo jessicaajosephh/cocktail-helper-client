@@ -49,25 +49,52 @@ function renderCocktail(name, image, instructions){
     cocktailForm.requestFullscreen()
 }
 
+function renderIngredient(e){
+
+    e.preventDefault()
+    let li = document.createElement('li')
+    let ingredientList = e.target.nextElementSibling
+    let ingredientName = e.target.children[0].value
+    li.innerText = ingredientName
+
+    ingredientList.appendChild(li)
+    e.target.reset()
+    submitIngredient(ingredientName)
+}
+
+ function submitIngredient(ingredientName){
+
+    fetch(ingredientsURL,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({
+           name: ingredientName
+
+        })
+    })
+
+    }
+
+fetchCocktails()
+
 function fetchCocktails(){
     fetch(cocktailsURL)
     .then(resp => resp.json())
-    .then(cocktails =>
+    .then(cocktails =>{
         cocktails.data.forEach(cocktail =>{
-            cocktailImage.src = cocktail.attributes.image 
-            cocktailName.innerText = cocktail.attributes.name 
-            ingredientList(cocktail)
-            cocktailInstructions.innerText = cocktail.attributes.instructions 
-    })
+            const cocktailData = cocktail.attributes
+            renderCocktail(cocktailData.name, cocktailData.image, cocktailData.instructions)
+    })}
 )}
 
-function ingredientList(cocktail){
-    let ingredients = cocktail.attributes.ingredients 
-    return ingredients.map(ingredients => {
-        let li = document.createElement('li')
-        li.innerText = ingredient.name 
-        ingredientsUl.appendChild(li)
-    })
-}
-
-fetchCocktails()
+// function ingredientList(cocktail){
+//     let ingredients = cocktail.attributes.ingredients 
+//     return ingredients.map(ingredients => {
+//         let li = document.createElement('li')
+//         li.innerText = ingredient.name 
+//         ingredientsUl.appendChild(li)
+//     })
+// }
