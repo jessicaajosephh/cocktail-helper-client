@@ -82,7 +82,7 @@ function renderCocktail(cocktailObj){
  }
 
  function renderIngredient(e){
-    console.log(e.target.nextElementSibling)
+    //console.log(e.target.nextElementSibling)
     e.preventDefault()
 
     let li = document.createElement('li')
