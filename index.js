@@ -85,9 +85,9 @@ function renderCocktail(cocktailObj){
     submitIngredient(ingredientName, cocktailId)
 }
 
- function submitIngredient(ingredientName){
+ function submitIngredient(ingredientName, cocktailId){
 
-    fetch(ingredientsURL,{
+    fetch(ingredientsURL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -95,10 +95,10 @@ function renderCocktail(cocktailObj){
         },
         body: JSON.stringify({
            name: ingredientName
-
+            cocktail_id: cocktailId
         })
     })
-
+    .catch(error => alert(error))
     }
 
 // function ingredientList(cocktail){
