@@ -7,6 +7,24 @@ const instructionsInput = document.getElementById("input-instructions")
 
 cocktailForm.addEventListener("submit", (e) => {submitCocktail(e)})
 
+function submitCocktail(e){
+    e.preventDefault()
+    fetch(cocktailsURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "applications/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({
+            image: imageInput.value 
+            name: cocktailNameInput.value 
+            instructions: instructionsInput.value 
+        })
+    })
+
+    renderCocktail(cocktailNameInput.value, imageInput.value, instructionsInput.value)
+}
+
 function fetchCocktails(){
     fetch(cocktailsURL)
     .then(resp => resp.json())
