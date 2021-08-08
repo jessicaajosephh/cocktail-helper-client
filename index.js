@@ -23,8 +23,18 @@ function submitCocktail(e){
         })
     })
 
-     renderCocktail(cocktailNameInput.value,imageInput.value, instructionsInput.value)
+    .then(resp => resp.json())
+    .then(cocktailObj => renderCocktail(cocktailObj))
 }
+
+fetchCocktails()
+
+fetchCocktails()
+function fetchCocktails(){
+    fetch(cocktailsURL)
+    .then(response => response.json())
+    .then(cocktails =>  cocktails.data.forEach(cocktail => renderCocktail(cocktail))
+)}
 
 function renderCocktail(name, image, instructions){
     const cocktailList = document.getElementById("cocktail-list")
@@ -82,18 +92,6 @@ function renderIngredient(e){
     })
 
     }
-
-fetchCocktails()
-
-function fetchCocktails(){
-    fetch(cocktailsURL)
-    .then(resp => resp.json())
-    .then(cocktails =>{
-        cocktails.data.forEach(cocktail =>{
-            const cocktailData = cocktail.attributes
-            renderCocktail(cocktailData.name, cocktailData.image, cocktailData.instructions)
-    })}
-)}
 
 // function ingredientList(cocktail){
 //     let ingredients = cocktail.attributes.ingredients 
