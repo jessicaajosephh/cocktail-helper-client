@@ -72,6 +72,15 @@ function renderCocktail(cocktailObj){
 
  }
 
+ function deleteCocktail(e){
+     const cocktailId = e.target.parentElement.dataset.id 
+
+     fetch(`${cocktailsURL}/${cocktailId}`, {
+         method: "DELETE"
+     })
+     e.target.parentElement.remove()
+ }
+
  function renderIngredient(e){
     console.log(e.target.nextElementSibling)
     e.preventDefault()
