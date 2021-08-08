@@ -36,30 +36,36 @@ function fetchCocktails(){
     .then(cocktails =>  cocktails.data.forEach(cocktail => renderCocktail(cocktail))
 )}
 
-function renderCocktail(name, image, instructions){
-    const cocktailList = document.getElementById("cocktail-list")
+function renderCocktail(cocktailObj){
 
-    const cocktailMarkup =`
-    
-            <h3 id="cocktail-name">${name}</h3><br>
-            <img src=${image} id="cocktail-image" width="250" height="250"><br>
-        
-            <label type="text">Instructions:</label>
-            <p id="instructions">${instructions}</p><br>
-        `
+        const cocktailList = document.getElementById("cocktail-list")
+        cocktailList.dataset.id = cocktailObj.id
+        const h3 = document.createElement('h3')
+        h3.innerText = cocktailObj.attributes.name
+        const img = document.createElement('img')
+        img.src = cocktailObj.attributes.image
+        img.width = 200
+        const p = document.createElement('p')
+        p.innerText = cocktailObj.attributes.instructions
+        const deleteBtn = document.createElement("button")
+        deleteBtn.innerText = "Delete Cocktail"
+        const ingredientForm = document.createElement('form')
+        ingredientForm.innerHTML += `<input type="text" id="ingredient-input" placeholder ="Ingredient">
+        <input type="submit" value="Add">`
 
-    const ingredientForm = document.createElement('form')
-    ingredientForm.innerHTML += `<input type="text" id="ingredient-input" placeholder ="Ingredient">
-    <input type="submit" value="Add">`
 
+        ingredientForm.addEventListener("submit", renderIngredient)
 
-     ingredientForm.addEventListener("submit", (e) => renderIngredient(e))
+        const ingredientList = document.createElement("ul")
+        const ingredient = cocktailObj.attributes.ingredients.forEach(ingredient =>{
+        const ingredientLi = document.createElement('li')
+        ingredientLi.innerText = ingredient.name
 
-    const ingredientDiv = document.getElementById("ingredient-list")
-    const ingredientList = document.createElement("ul")
+        ingredientList.appendChild(ingredientLi)
 
-    cocktailList.innerHTML += cocktailMarkup
-    cocktailList.append( ingredientForm, ingredientList)
+    })
+
+    cocktailList.append( h3, img, ingredientList, ingredientForm, p, deleteBtn)
     cocktailForm.reset()
 
  }
