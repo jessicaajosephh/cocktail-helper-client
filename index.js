@@ -59,7 +59,7 @@ function renderCocktail(cocktailObj){
         ingredientForm.addEventListener("submit", renderIngredient)
 
         const ingredientList = document.createElement("ul")
-        const ingredient = cocktailObj.attributes.ingredients.forEach(ingredient =>{
+        cocktailObj.attributes.ingredients.forEach(ingredient =>{
         const ingredientLi = document.createElement('li')
         ingredientLi.innerText = ingredient.name
 
