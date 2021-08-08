@@ -1,9 +1,9 @@
 const cocktailsURL = "http://localhost:3000/cocktails"
-const cocktailDiv = document.getElementById("cocktail-id")
-const cocktailName = document.getElementById("cocktail-name")
-const ingredientsUl = document.getElementById("ingredient-list")
-const cocktailImage = document.getElementById("cocktail-image")
-const cocktailInstructions = document.getElementById("instructions")
+const ingredientsURL = "http://localhost:3000/ingredients"
+const cocktailForm = document.getElementById("cocktail-form")
+const iimageInput = document.getElementById("input-image-url")
+const cocktailNameInput = document.getElementById("input-cocktail-name")
+const instructionsInput = document.getElementById("input-instructions")
 
 function fetchCocktails(){
     fetch(cocktailsURL)
